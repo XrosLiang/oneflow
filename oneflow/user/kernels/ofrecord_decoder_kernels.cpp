@@ -105,7 +105,7 @@ class OFRecordRawDecoderKernel final : public user_op::OpKernel {
 #define REGISTER_RAW_DECODER_KERNEL(dtype)                                      \
   REGISTER_USER_KERNEL("ofrecord_raw_decoder")                                  \
       .SetCreateFn<OFRecordRawDecoderKernel<dtype>>()                           \
-      .SetIsMatchedHob((user_op::HobDeviceType() == DeviceType::kCPU)           \
+      .SetIsMatchedHob((user_op::HobDeviceTag() == "cpu")                       \
                        & (user_op::HobDataType("in", 0) == DataType::kOFRecord) \
                        & (user_op::HobDataType("out", 0) == GetDataType<dtype>::value));
 
@@ -251,7 +251,7 @@ class OFRecordImageDecoderRandomCropKernel final : public user_op::OpKernel {
 
 REGISTER_USER_KERNEL("ofrecord_image_decoder_random_crop")
     .SetCreateFn<OFRecordImageDecoderRandomCropKernel>()
-    .SetIsMatchedHob((user_op::HobDeviceType() == DeviceType::kCPU)
+    .SetIsMatchedHob((user_op::HobDeviceTag() == "cpu")
                      & (user_op::HobDataType("in", 0) == DataType::kOFRecord)
                      & (user_op::HobDataType("out", 0) == DataType::kTensorBuffer));
 
@@ -283,7 +283,7 @@ class OFRecordImageDecoderKernel final : public user_op::OpKernel {
 
 REGISTER_USER_KERNEL("ofrecord_image_decoder")
     .SetCreateFn<OFRecordImageDecoderKernel>()
-    .SetIsMatchedHob((user_op::HobDeviceType() == DeviceType::kCPU)
+    .SetIsMatchedHob((user_op::HobDeviceTag() == "cpu")
                      & (user_op::HobDataType("in", 0) == DataType::kOFRecord)
                      & (user_op::HobDataType("out", 0) == DataType::kTensorBuffer));
 
